@@ -1,5 +1,6 @@
 package com.cy.store.mapper;
 
+import com.cy.store.entity.Address;
 import com.cy.store.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -40,4 +41,14 @@ public interface UserMapper {
      * @return
      */
     Integer updateInfoByUid(User user);
+
+    /**
+     * 修改用户的头像
+     * @param uid
+     * @param avatar
+     * @param modifiedUser
+     * @param modifiedTime
+     * @return
+     */
+    Integer updateAvatarByUid(Integer uid,String avatar, String modifiedUser, Date modifiedTime);
 }

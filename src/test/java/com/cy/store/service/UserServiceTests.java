@@ -54,4 +54,8 @@ public class UserServiceTests {
         iUserService.changeInfo(7,"test01",user);
 
     }
+    @Test
+    public void updateAvatarByUid(){
+        iUserService.changeAvatar(1,"change","user01");
+    }
 }

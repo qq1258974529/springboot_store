@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
+import javax.websocket.Session;
 import java.util.Date;
 import java.util.UUID;
 
@@ -124,6 +125,19 @@ public class IUserServiceImpl implements IUserService {
         Integer rows = userMapper.updateInfoByUid(user);
         if(rows != 1){
             throw new UpdateException("更新数据时产生未知的异常");
+        }
+    }
+
+
+    @Override
+    public void changeAvatar(Integer uid, String avatar, String username) {
+        User result = userMapper.findByUid(uid);
+        if(result == null | result.getIsDelete().equals(1)){
+            throw new UserNotFoundException("用户数据不存在");
+        }
+        Integer rows = userMapper.updateAvatarByUid(uid, avatar, username, new Date());
+        if(rows != 1){
+            throw new UpdateException("更新用户头像产生的未知异常");
         }
     }
 }
