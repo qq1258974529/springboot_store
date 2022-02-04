@@ -37,8 +37,8 @@ public class UserController extends BaseController{
         User data = userService.login(username, password);
         session.setAttribute("uid",data.getUid());
         session.setAttribute("username",data.getUsername());
-        System.out.println(getuidFromSession(session));
-        System.out.println(getUsernameFromSession(session));
+//        System.out.println(getuidFromSession(session));
+//        System.out.println(getUsernameFromSession(session));
 
         return new JsonResult<User>(OK,data);
     }

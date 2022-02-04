@@ -1,7 +1,9 @@
 package com.cy.store.mapper;
 
 import com.cy.store.entity.Address;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface AddressMapper {
     /**
      * 插入用户收货地址

@@ -3,7 +3,7 @@ package com.cy.store.entity;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class User extends BaseEntity implements Serializable {
+public class User extends BaseEntity {
     private Integer uid;
     private String username;
     private String password;
