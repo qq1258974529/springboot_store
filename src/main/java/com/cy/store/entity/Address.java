@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Address extends BaseEntity {
-    private int aid;
-    private int uid;
+    private Integer aid;
+    private Integer uid;
     private String name;
     private String provinceName;
     private String provinceCode;
@@ -18,21 +18,21 @@ public class Address extends BaseEntity {
     private String phone;
     private String tel;
     private String tag;
-    private int isDefault;
+    private Integer isDefault;
 
-    public int getAid() {
+    public Integer getAid() {
         return aid;
     }
 
-    public void setAid(int aid) {
+    public void setAid(Integer aid) {
         this.aid = aid;
     }
 
-    public int getUid() {
+    public Integer getUid() {
         return uid;
     }
 
-    public void setUid(int uid) {
+    public void setUid(Integer uid) {
         this.uid = uid;
     }
 
@@ -132,11 +132,11 @@ public class Address extends BaseEntity {
         this.tag = tag;
     }
 
-    public int getIsDefault() {
+    public Integer getIsDefault() {
         return isDefault;
     }
 
-    public void setIsDefault(int isDefault) {
+    public void setIsDefault(Integer isDefault) {
         this.isDefault = isDefault;
     }
 

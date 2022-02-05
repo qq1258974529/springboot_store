@@ -1,7 +1,10 @@
 package com.cy.store.mapper;
 
 import com.cy.store.entity.Address;
+import com.cy.store.entity.District;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface AddressMapper {
@@ -18,4 +21,13 @@ public interface AddressMapper {
      * @return 当前用户的收获地址总数
      */
     Integer countByUid(Integer uid);
+
+    /**
+     * 根据用户的id查询用户的收货地址
+     * @param uid
+     * @return 收货地址
+     */
+
+    List<Address> findByUid(Integer uid);
+
 }

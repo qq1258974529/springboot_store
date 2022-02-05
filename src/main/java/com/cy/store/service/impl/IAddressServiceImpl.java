@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.awt.image.AreaAveragingScaleFilter;
 import java.util.Date;
+import java.util.List;
+
 @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @Service
 public class IAddressServiceImpl implements IAddressService {
@@ -48,5 +50,25 @@ public class IAddressServiceImpl implements IAddressService {
         if(rows!=1){
             throw new InsertException("插入用户的收货地址产生异常");
         }
+    }
+
+    @Override
+    public List<Address> getByUid(Integer uid) {
+        List<Address> list = addressMapper.findByUid(uid);
+        for (Address address : list) {
+            address.setUid(null);
+            address.setAid(null);
+            address.setProvinceCode(null);
+            address.setCityCode(null);
+            address.setAreaCode(null);
+            address.setZip(null);
+            address.setPhone(null);
+            address.setTel(null);
+            address.setCreatedTime(null);
+            address.setCreatedUser(null);
+            address.setModifiedTime(null);
+            address.setModifiedUser(null);
+        }
+        return list;
     }
 }

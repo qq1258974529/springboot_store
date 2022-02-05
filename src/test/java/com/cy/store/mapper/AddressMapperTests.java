@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
+import java.util.List;
 
 @SuppressWarnings("ALL")
 @SpringBootTest
@@ -28,5 +29,11 @@ public class AddressMapperTests {
     public void coutByUid(){
         Integer integer = addressMapper.countByUid(1);
         System.out.println("-----"+integer);
+    }
+
+    @Test
+    public void findByUid(){
+        List<Address> byUid = addressMapper.findByUid(1);
+        System.out.println(byUid);
     }
 }
