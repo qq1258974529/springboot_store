@@ -4,8 +4,7 @@ import com.cy.store.entity.Address;
 import com.cy.store.mapper.AddressMapper;
 import com.cy.store.service.IAddressService;
 import com.cy.store.service.IDistrictService;
-import com.cy.store.service.ex.AddressCountLimitException;
-import com.cy.store.service.ex.InsertException;
+import com.cy.store.service.ex.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -56,8 +55,8 @@ public class IAddressServiceImpl implements IAddressService {
     public List<Address> getByUid(Integer uid) {
         List<Address> list = addressMapper.findByUid(uid);
         for (Address address : list) {
-            address.setUid(null);
-            address.setAid(null);
+//            address.setUid(null);
+//            address.setAid(null);
             address.setProvinceCode(null);
             address.setCityCode(null);
             address.setAreaCode(null);
@@ -70,5 +69,54 @@ public class IAddressServiceImpl implements IAddressService {
             address.setModifiedUser(null);
         }
         return list;
+    }
+
+
+    @Override
+    public void setDefault(Integer aid, Integer uid, String username) {
+        Address result = addressMapper.findByAid(aid);
+        if (result == null){
+            throw new AddressNotFoundException("收货地址不存在");
+        }
+        if(!result.getUid().equals(uid)){
+            throw new AccessDeniedException("非法数据访问");
+        }
+        Integer rows = addressMapper.updateNonDefault(uid);
+        if(rows < 1){
+            throw new UpdateException("更新数据产生未知的异常");
+        }
+        rows = addressMapper.updateDefaultByAid(aid, username, new Date());
+        if(rows < 1){
+            throw new UpdateException("更新数据产生未知的异常");
+        }
+    }
+
+
+    @Override
+    public void delete(Integer aid, Integer uid, String username) {
+        Address result = addressMapper.findByAid(aid);
+        if(result == null){
+            throw  new AddressNotFoundException("收货地址找不到异常");
+        }
+        if(!result.getUid().equals(uid)){
+            throw new AccessDeniedException("非法数据访问的异常");
+        }
+
+        Integer rows = addressMapper.deleteByAid(aid);
+        if(rows != 1){
+            throw new DeleteException("删除数据产生未知的异常");
+        }
+        Integer count = addressMapper.countByUid(uid);
+        if(count == 0){
+            return;
+        }
+        Address address = addressMapper.findLastModified(uid);
+        if(result.getIsDefault() ==  0){
+            return;
+        }
+        rows = addressMapper.updateDefaultByAid(address.getAid(),username,new Date());
+        if(rows != 1){
+            throw new UpdateException("更新数据时产生未知的异常");
+        }
     }
 }

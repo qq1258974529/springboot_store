@@ -8,4 +8,6 @@ public interface IAddressService {
 
     void addNewAddress(Address address,Integer uid,String username);
     List<Address> getByUid(Integer uid);
+    void setDefault(Integer aid,Integer uid,String username);
+    void delete(Integer aid,Integer uid,String username);
 }

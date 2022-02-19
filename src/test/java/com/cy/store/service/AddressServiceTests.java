@@ -22,4 +22,13 @@ public class AddressServiceTests {
         address.setName("ssss");
         iAddressService.addNewAddress(address,1,"管理员");
     }
+    @Test
+    public void setDefault(){
+        iAddressService.setDefault(5,9,"admin");
+    }
+
+    @Test
+    public void delete(){
+        iAddressService.delete(4,9,"管理员");
+    }
 }
