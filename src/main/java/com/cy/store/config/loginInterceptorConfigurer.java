@@ -26,6 +26,7 @@ public class loginInterceptorConfigurer implements WebMvcConfigurer {
         patterns.add("/users/reg");
         patterns.add("/users/login");
         patterns.add("/districts/**");
+        patterns.add("/products/**");
         registry.addInterceptor(interceptor).addPathPatterns("/**").excludePathPatterns(patterns);
     }
 }
